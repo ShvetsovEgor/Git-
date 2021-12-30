@@ -1,16 +1,16 @@
 import sys
-import random
+from random import randint
 import traceback
-from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from UI import Ui_MainWindow
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
-        self.setWindowTitle('Git и желтые окружности')
+        self.setupUi(self)
+        self.setWindowTitle('Git и случайные окружности')
         self.pushButton.clicked.connect(self.paint)
         self.do_paint = False
 
@@ -32,9 +32,9 @@ class Example(QMainWindow):
             self.qp.end()
 
     def draw_ellipse(self):
-        d = random.randint(1, 500)
+        d = randint(1, 500)
         # Задаем кисть
-        self.qp.setBrush(QColor(255, 255, 0))
+        self.qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         # Рисуем прямоугольник заданной кистью
         self.qp.drawEllipse(0, 0, d, d)
 
